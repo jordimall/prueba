@@ -1,0 +1,64 @@
+/**
+ * 
+ */
+package com.pruebatecnica.www.implement;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.pruebatecnica.www.dao.IUserDAO;
+import com.pruebatecnica.www.dto.User;
+import com.pruebatecnica.www.service.IUserService;
+
+/**
+ * 
+ */
+@Service
+public class UserServiceImpl implements IUserService {
+
+	@Autowired
+	IUserDAO daoUser;
+
+	@Autowired(required = true)
+	private PasswordEncoder passwordEncoder;
+
+	/**
+	 * Devuelve un user en especifico
+	 * 
+	 * @param id
+	 * @return User
+	 */
+	public User getId(Long id) {
+		return daoUser.findById(id).get();
+	}
+
+	/**
+	 * Añade un user a la base de datos
+	 * 
+	 * @param user
+	 * @return User
+	 */
+	public User add(User user) {
+		Optional<User> theUser = daoUser.findByUserName(user.getUserName());
+		if (theUser.isPresent()) {
+
+		}
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		return daoUser.save(user);
+
+	}
+
+	/**
+	 * Actualiza un user
+	 * 
+	 * @param user
+	 * @return User
+	 */
+	public User update(User user) {
+		return daoUser.save(user);
+	}
+
+}
