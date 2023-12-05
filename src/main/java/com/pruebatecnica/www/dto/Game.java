@@ -19,9 +19,9 @@ public class Game {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "nameGame")
+	@Column(name = "name_game")
 	private String nameGame;
-	@Column(name = "urlCoverImage")
+	@Column(name = "url_cover_image")
 	private String urlCoverImage;
 
 	/**
