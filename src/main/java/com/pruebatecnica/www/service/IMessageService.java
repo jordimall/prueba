@@ -5,6 +5,8 @@ package com.pruebatecnica.www.service;
 
 import java.util.List;
 
+import com.pruebatecnica.www.dto.Message;
+
 /**
  * 
  */
@@ -13,9 +15,9 @@ public interface IMessageService {
 	/**
 	 * Deveuelve todos los IMessageServices
 	 * 
-	 * @return List<IMessageService>
+	 * @return List<Message>
 	 */
-	public List<IMessageService> getAllByParty(Long id);
+	public List<Message> getAllByMessage(Long id);
 
 	/**
 	 * Devuelve un IMessageService en especifico
@@ -23,7 +25,7 @@ public interface IMessageService {
 	 * @param id
 	 * @return IMessageService
 	 */
-	public IMessageService getId(Long id);
+	public Message getId(Long id);
 
 	/**
 	 * Añade un IMessageService a la base de datos
@@ -31,7 +33,7 @@ public interface IMessageService {
 	 * @param IMessageService
 	 * @return IMessageService
 	 */
-	public IMessageService add(IMessageService IMessageService);
+	public Message add(Message message);
 
 	/**
 	 * Actualiza un IMessageService
@@ -39,7 +41,7 @@ public interface IMessageService {
 	 * @param IMessageService
 	 * @return IMessageService
 	 */
-	public IMessageService update(IMessageService IMessageService);
+	public Message update(Message message);
 
 	/**
 	 * Elimina un IMessageService
