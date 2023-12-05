@@ -39,22 +39,6 @@ public class MessageController {
 	}
 
 	/**
-	 * Devuelve un message en especifico
-	 * 
-	 * @param id
-	 * @return Message
-	 */
-	@GetMapping("/show/{id}")
-	public Message show(@PathVariable(name = "id") Long id) {
-
-		Message message_xid = new Message();
-
-		message_xid = messageServiceImpl.getId(id);
-
-		return message_xid;
-	}
-
-	/**
 	 * Añade un message a la base de datos
 	 * 
 	 * @param message
