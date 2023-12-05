@@ -3,7 +3,10 @@
  */
 package com.pruebatecnica.www.implement;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pruebatecnica.www.dao.IUserDAO;
@@ -18,6 +21,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IUserDAO daoUser;
+
+	@Autowired(required = true)
+	private PasswordEncoder passwordEncoder;
 
 	/**
 	 * Devuelve un user en especifico
@@ -36,7 +42,13 @@ public class UserServiceImpl implements IUserService {
 	 * @return User
 	 */
 	public User add(User user) {
+		Optional<User> theUser = daoUser.findByUserName(user.getUserName());
+		if (theUser.isPresent()) {
+
+		}
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return daoUser.save(user);
+
 	}
 
 	/**
