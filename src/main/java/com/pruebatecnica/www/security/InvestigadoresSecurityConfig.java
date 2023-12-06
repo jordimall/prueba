@@ -21,10 +21,9 @@ import com.pruebatecnica.www.jwt.JWTAuthenticationFilter;
 @EnableWebSecurity
 public class InvestigadoresSecurityConfig {
 
-	private static final String[] SECURED_URLs = { "/investigador/**" };
-	private static final String[] user_unsecured_urls = { "/equipo/**" };
+	private static final String[] SECURED_URLs = { "/api/message/**","/api/belongs/**","/api/partys**","/api/users/**", };
 
-	private static final String[] UN_SECURED_URLs = { "/facultad/all", "/users/**", "/login/**" };
+	private static final String[] UN_SECURED_URLs = { "/login/**" };
 
 	@Autowired
 	private JWTAuthenticationFilter authenticationFilter;
@@ -49,7 +48,7 @@ public class InvestigadoresSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf().disable()
 				.authorizeHttpRequests(auth -> auth.requestMatchers(UN_SECURED_URLs).permitAll()
-						.requestMatchers(user_unsecured_urls).hasAuthority("USER").requestMatchers(SECURED_URLs)
+						.requestMatchers(SECURED_URLs)
 						.hasAnyAuthority("ADMIN", "USER").anyRequest().authenticated())
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authenticationProvider(authenticationProvider())
